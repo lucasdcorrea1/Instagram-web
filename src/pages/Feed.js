@@ -25,7 +25,7 @@ class feed extends Component {
     };
 
     registerToSocket = () => {
-        const socket = io ('http://localhost:3333');
+        const socket = io ('https://isntagram-api-lucas.herokuapp.com');
  
         //post, like
  
@@ -62,7 +62,7 @@ class feed extends Component {
                         </div>
                         <img src={more} alt="Mais" />
                     </header>
-                    <img src={`http://localhost:3333/files/${post.image}`} alt="" />
+                    <img src={`https://isntagram-api-lucas.herokuapp.com/files/${post.image}`} alt="" />
                     <footer>
                         <div className="actions">
                             <button type="button" onClick={() => this.handleLike(post._id)}>

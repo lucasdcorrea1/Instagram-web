@@ -35,4 +35,4 @@ Please read [CONTRIBUTING](https://github.com/lucasdcorrea1/Instagram-web/blob/m
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 - **[MIT license](https://github.com/Data-Tongji/datatongji-backend/blob/master/LICENCE)**
-- Copyright 2019 © <a href="https://github.com/Data-Tongji" target="_blank">Data Tongjì</a>.
+- Copyright 2019 © <a href="https://www.gitshowcase.com/lucasdcorrea1" target="_blank">Lucas Damas Corrêa</a>.

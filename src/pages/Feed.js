@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
-import api from '../services/api';
+import api from '../services/api'
 import io from 'socket.io-client';
+import './Feed.css';
 
-import Header from '../components/Header'
-
-import '../assets/css/Feed.css';
-
-import more from '../assets/images/more.svg';
-import like from '../assets/images/like.svg';
-import comment from '../assets/images/comment.svg';
-import send from '../assets/images/send.svg';
+import more from '../assets/more.svg';
+import like from '../assets/like.svg';
+import comment from '../assets/comment.svg';
+import send from '../assets/send.svg';
 
 class feed extends Component {
-    state = {
-        feed: [],
-    };
+state = {
+    feed: [],
+};
 
     async componentDidMount(){
         this.registerToSocket();
-
-        const response = await api.get('posts')
+        const response = await api.get('posts');
 
         this.setState({ feed: response.data });
     };
 
     registerToSocket = () => {
         const socket = io ('https://isntagram-api-lucas.herokuapp.com');
- 
+
         //post, like
- 
+
         socket.on('post', newPost => {
             this.setState({feed:[newPost,...this.state.feed]});
         })
@@ -40,50 +36,51 @@ class feed extends Component {
                 )
             });
         })
-    };
-    
+    }
+
     handleLike = id => {
         api.post(`/posts/${id}/like`)
-
     };
 
-    render() {
-        return(
-            <section >
-                <Header></Header>
-                <div  id="post-list">
+    render (){
+        return (
+            <section id="post-list">
+                { this.state.feed.map(post => (
 
-                { this.state.feed.map(post =>(
-                <article key={ post._id }>
-                    <header>
-                        <div className="user-info">
-                            <span>{post.author}</span>
-                            <span className="place">{post.place}</span>
-                        </div>
-                        <img src={more} alt="Mais" />
-                    </header>
-                    <img src={`https://isntagram-api-lucas.herokuapp.com/files/${post.image}`} alt="" />
-                    <footer>
-                        <div className="actions">
-                            <button type="button" onClick={() => this.handleLike(post._id)}>
-                                <img src={like} />
-                            </button>
-                            <img src={comment} />
-                            <img src={send} />
-                        </div>
-                        <strong>{post.likes}</strong>
-                        <p>
-                            {post.description}
-                            <span>{post.hashtags}</span>
-                        </p>
-                    </footer>
-                </article> 
-                ))}
-                </div>
+            <article key={post._id}>
+                <header>
+                    <div className="user-info">
+                        <span>{post.author}</span>
+                        <span className="place">{post.place}</span>
+                    </div>
 
+                    <img src={more} alt="Mais" />
+                </header>                    
+
+                <img src={`https://isntagram-api-lucas.herokuapp.com/${post.image}`} alt=''/>
+
+                <footer>
+                    <div className="actions">
+                        <button type="button" onClick={() => this.handleLike(post._id)}>
+                        <img src = {like} alt=""/></button>
+                        <img src = {comment} alt=""/>
+                        <img src = {send} alt=""/>
+                    </div>
+
+                <strong>{post.likes} curtidas</strong>
+                <p>
+                    {post.description}
+                    <span>{post.hashtags}</span>
+                </p>
+                </footer>
+
+            </article>
+
+)
+)}
             </section>
         );
-    };
-}
+    }
+};
 
 export default feed;

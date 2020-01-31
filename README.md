@@ -1,4 +1,4 @@
-https://isntagram-web-lucas.firebaseapp.com/feed
+https://isntagram-web-lucas.firebaseapp.com
 ## Technologies
 
   - Node.js;
